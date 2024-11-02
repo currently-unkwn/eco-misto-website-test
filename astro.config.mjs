@@ -15,7 +15,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://ecomisto.org",
+  site: "https://ecomisto-test.netlify.app",
   integrations: [
     react(),
     mdx(),
