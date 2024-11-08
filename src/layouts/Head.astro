@@ -1,11 +1,23 @@
 ---
 import { SEO, type Props as SEOProps } from "astro-seo";
+import { getImage } from "astro:assets";
+import faviconPngSrc from "../assets/favicon.png";
+import faviconSvgSrc from "../assets/favicon.svg";
 
 // Components
 import GoogleAnalytics from "@/components/GoogleAnalytics.astro";
 
 // Data
 import { baseData } from "../data/siteData";
+
+// Favicons
+const appleTouchIcon = await getImage({
+  src: faviconPngSrc,
+  width: 180,
+  height: 180,
+  format: "png",
+});
+const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" });
 
 interface Props {
   seo?: SEOProps;
@@ -25,7 +37,10 @@ const ogImageUrl = `${Astro.url.origin}/og/${ogImage?.template ?? "default"}.png
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href={faviconSvg.src} type="image/svg+xml" />
+  <link rel="apple-touch-icon" href={appleTouchIcon.src} />
+  <link rel="manifest" href="/manifest.json" />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <meta
     name="viewport"
